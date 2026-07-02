@@ -8,14 +8,14 @@ void downloadVideo(std::string flags)
     
     while (true)
     {
-        std::cout << "enter a link: ";
+        std::cout << "Enter a link: ";
         std::cin >> link;
 
         if (link.find("https://") == std::string::npos || link.find_first_of(";&|`$\"") != std::string::npos)
         { 
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "[!] invalid link. try again\n";
+            std::cout << "[!] Invalid link. Try again\n";
             continue;
         }
 
@@ -39,15 +39,15 @@ void menu()
         std::cout << "\033[36m" << "ez-ytdlp\n" << "\033[0m";
         std::cout << "(1) mp3\n";
         std::cout << "(2) mp4\n";
-        std::cout << "(3) exit\n";
-        std::cout << "choice: ";
+        std::cout << "(3) Exit\n";
+        std::cout << "Choice: ";
 
         std::cin >> choice;
         if (std::cin.fail())
         {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "[!] invalid input. try again\n";
+            std::cout << "[!] Invalid input. Try again\n";
             continue;
         }
 
@@ -56,24 +56,24 @@ void menu()
             case 1:
             {
                 downloadVideo("yt-dlp -x --audio-format mp3 ");
-                std::cout << "[+] audio downloaded successfully!\n";
+                std::cout << "[+] Audio downloaded successfully!\n";
                 break;
             }
             case 2:
             {
                 downloadVideo("yt-dlp -f \"bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best\" ");
-                std::cout << "[+] video downloaded successfully!\n";
+                std::cout << "[+] Video downloaded successfully!\n";
                 break;
             }
             case 3:
             {
-                std::cout << "byebye\n";
+                std::cout << "Bye-bye!\n";
                 return;
                 break;
             }
             default:
             {
-                std::cout << "[!] invalid input. try again\n";
+                std::cout << "[!] Choice out of range. Try again\n";
                 break;
             }
         }
