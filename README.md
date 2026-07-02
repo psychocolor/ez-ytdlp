@@ -9,7 +9,7 @@ Simple CLI wrapper for yt-dlp to quickly download audio/video without having to 
 
 ## How to run
 1. Clone the repository.
-2. Compile source code using a compiler of your choice (in this case g++).
+2. Compile source code using a compiler of your choice (in my case g++).
 ```bash
 g++ -o ez-ytdlp main.cpp 
 ```
