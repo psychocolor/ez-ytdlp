@@ -2,6 +2,28 @@
 #include <string>
 #include <limits>
 
+void commandFailCheck(int result)
+{
+    switch (result)
+    {
+        case -1:
+        {
+            std::cerr << "[-] Error. Couldn't open command line.\n";
+            break;
+        }
+        case 0:
+        {
+            std::cout << "[+] File downloaded successfully!\n";
+            break;
+        }
+        case 1:
+        {
+            std::cerr << "[-] Error. Couldn't download file, read above for details.\n";
+            break;
+        }
+    }
+}
+
 void downloadVideo(std::string flags)
 {
     std::string link{};
@@ -25,7 +47,8 @@ void downloadVideo(std::string flags)
     flags += "\"" + link + "\"";
     
     const char* command{flags.c_str()};
-    system(command);
+    int result{system(command)};
+    commandFailCheck(result);
 
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -47,7 +70,7 @@ void menu()
         {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "[!] Invalid input. Try again\n";
+            std::cerr << "[!] Invalid input. Try again\n";
             continue;
         }
 
@@ -56,13 +79,11 @@ void menu()
             case 1:
             {
                 downloadVideo("yt-dlp -x --audio-format mp3 ");
-                std::cout << "[+] Audio downloaded successfully!\n";
                 break;
             }
             case 2:
             {
                 downloadVideo("yt-dlp -f \"bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best\" ");
-                std::cout << "[+] Video downloaded successfully!\n";
                 break;
             }
             case 3:
@@ -73,7 +94,7 @@ void menu()
             }
             default:
             {
-                std::cout << "[!] Choice out of range. Try again\n";
+                std::cerr << "[!] Choice out of range. Try again\n";
                 break;
             }
         }
